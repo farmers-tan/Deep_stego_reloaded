@@ -1,13 +1,15 @@
 import tensorflow as tf
 import numpy as np
 import os
+from PIL import Image,ImageOps
 import glob
 import random
 import Image
+from os.path import join
 import net_struct
 
 ## sys_para
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 PATH = "/HDD/rdy/dataset/color_256" #250
 
 
@@ -102,7 +104,7 @@ def test_graph(secret_tensor, cover_tensor):
         return merged_summary
 
 with tf.Session() as sess:
-    graph = tf.graph()
+    graph = tf.Graph()
     writer = tf.summary.FileWriter('./log',sess.graph)
 
     secret_tensor = tf.placeholder(shape=[None, 256, 256, 3],dtype=tf.float32,name='prep_input')
@@ -122,10 +124,12 @@ with tf.Session() as sess:
 
     for ep in range(10):
         for itr in range(epoch_step):
-            cover_img, secret_img = get_img_batch(file_list=File_list,batch_size = 10)
+            cover_img, secret_img = get_img_batch(file_list=File_list,batch_size = 32)
 
             sess.run([train_op],feed_dict={secret_tensor:secret_img, cover_tensor:cover_img})
-            print("\r", 'Training_itr_%d'%itr+' epoch %d'ep, end = "")
+            os.system('clear')
+            print('Training_itr_%d'%itr+' epoch %d'%ep)
+
 
             if itr % 10 == 0:
                 summary,global_step = sess.run([summary_op,global_step_tensor], feed_dict={secret_tensor:secret_img, cover_tensor:cover_img})

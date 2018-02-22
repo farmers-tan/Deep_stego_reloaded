@@ -62,7 +62,7 @@ def rev_net(container_tensor):
             conv_3x3 = tf.layers.conv2d(inputs=conv_3x3, filters=20, kernel_size=3, padding='same', name='4',activation=tf.nn.relu)
 
         with tf.variable_scope("4x4_conv"):
-            conv_4x4 = tf.layers.conv2d(inputs=contianer_tensor, filters=20, kernel_size=4, padding='same', name='1',activation=tf.nn.relu)
+            conv_4x4 = tf.layers.conv2d(inputs=container_tensor, filters=20, kernel_size=4, padding='same', name='1',activation=tf.nn.relu)
             conv_4x4 = tf.layers.conv2d(inputs=conv_4x4, filters=20, kernel_size=4, padding='same', name='2',activation=tf.nn.relu)
             conv_4x4 = tf.layers.conv2d(inputs=conv_4x4, filters=20, kernel_size=4, padding='same', name='3',activation=tf.nn.relu)
             conv_4x4 = tf.layers.conv2d(inputs=conv_4x4, filters=20, kernel_size=4, padding='same', name='4',activation=tf.nn.relu)
