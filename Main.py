@@ -8,6 +8,7 @@ import random
 import Image
 from os.path import join
 import net_struct
+import descriminator
 import time
 
 ## sys_para
@@ -121,7 +122,6 @@ with tf.Session() as sess:
     secret_tensor = tf.placeholder(shape=[None, 256, 256, 3],dtype=tf.float32,name="prep_input")
     cover_tensor = tf.placeholder(shape=[None, 256, 256, 3], dtype=tf.float32, name="hiding_input")
     writer = tf.summary.FileWriter("./logger")
-
 
     train_op, summary_op = training_graph(secret_tensor, cover_tensor, global_step_tensor)
     test_op = test_graph(secret_tensor,cover_tensor)
