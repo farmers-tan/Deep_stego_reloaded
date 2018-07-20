@@ -11,7 +11,7 @@ def get_img_batch(file_list, batch_size, counter):  # get a numpy tensor with sh
 
     for i in range(batch_size):
         path = join(file_list+str(counter+i)+'.JPEG')
-        img = np.array(Image.open(path).convert("RGB"),dtype=np.float32)
+        img = np.divide(np.array(Image.open(path).convert("RGB"),dtype=np.float32),255.0)
         img_batch.append(img)
 
     counter = counter + batch_size
@@ -29,7 +29,7 @@ def get_img_batch_rank3(file_list, batch_size, counter, num_rank3):  # get a num
 
         for ii in range(batch_size):
             path = join(file_list+str(counter+ii)+'.JPEG')
-            img = np.array(Image.open(path).convert("RGB"),dtype=np.float32)
+            img = np.divide(np.array(Image.open(path).convert("RGB"),dtype=np.float32),255.0)
             img_batch_tmp.append(img)
 
         if i == 0:
